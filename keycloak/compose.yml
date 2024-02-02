@@ -1,0 +1,56 @@
+services:
+  keycloak:
+    build: .
+    command:
+      - start
+      - "--hostname=${KC_HOSTNAME:-localhost}"
+    environment:
+      KC_HEALTH_ENABLED: "true"
+      KC_METRICS_ENABLED: ${KC_METRICS_ENABLED:-true}
+      KC_HOSTNAME: ${KC_HOSTNAME:-localhost}
+      KC_BOOTSTRAP_ADMIN_USERNAME: ${KC_BOOTSTRAP_ADMIN_USERNAME:-admin}
+      KC_BOOTSTRAP_ADMIN_PASSWORD: ${KC_BOOTSTRAP_ADMIN_PASSWORD:-admin}
+      KC_DB_URL_HOST: ${KC_DB_URL_HOST:-postgres}
+      KC_DB_URL_PORT: ${KC_DB_URL_PORT:-5432}
+      KC_DB_URL_DATABASE: ${KC_DB_URL_DATABASE:-postgres}
+      KC_DB_USERNAME: ${KC_DB_USERNAME:-postgres}
+      KC_DB_PASSWORD: ${KC_DB_PASSWORD:-postgres}
+      KC_LOG_LEVEL: ${KC_LOG_LEVEL:-info}
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8080/health/ready" ]
+      interval: 15s
+      timeout: 2s
+      retries: 15
+    ports:
+      - "8080:8080"
+      - "8443:8443"
+    networks:
+      - kc_net
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  postgres:
+    image: postgres:latest
+    networks:
+      - kc_net
+    environment:
+      POSTGRES_USER: '${KC_DB_USERNAME:-postgres}'
+      POSTGRES_DB: '${KC_DB_URL_DATABASE:-postgres}'
+      POSTGRES_PASSWORD: '${KC_BD_PASSWORD:-postgres}'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready", "-d", "${KC_DB_URL_DATABASE:-postgres}" ]
+      interval: 30s
+      timeout: 60s
+      retries: 5
+      start_period: 80s
+
+volumes:
+  postgres_data:
+
+
+networks:
+  kc_net:
+    driver: bridge

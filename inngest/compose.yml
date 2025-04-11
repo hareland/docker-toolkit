@@ -1,19 +1,22 @@
 services:
   inngest:
-    image: inngest/inngest
-    command: 'inngest start --config "/app/config/inngest.yml"'
+    build: .
+    command: bash /app/entrypoint.sh
+    entrypoint: /app/entrypoint.sh
     ports:
       - "8288:8288"
     networks:
       - inngestnet
     volumes:
       - ./inngest.yml:/app/config/inngest.yml
+      - inngest_data:/app/data
     environment:
       INNGEST_DEV: 0
-      INNGEST_EVENT_KEY: '${INNGEST_EVENT_KEY:-local,winner,test}'
-      INNGEST_SIGNING_KEY: '${INNGEST_SECRET_KEY:-local,winner,test}'
-      INNGEST_REDIS_URI: '${INNGEST_REDIS_URI:-redis://inngest-redis:6379}'
-      INNGEST_POSTGRES_URI: '${INNGEST_POSTGRES_URI:-postgresql://postgres:postgres@inngest-postgres:5432/inngest}'
+      INNGEST_EVENT_KEYS: ${INNGEST_EVENT_KEYS:-local,development,production}
+      INNGEST_SIGNING_KEY: ${INNGEST_SIGNING_KEY:-local-signing-key}
+      INNGEST_REDIS_URI: ${INNGEST_REDIS_URI:-redis://inngest-redis:6379}
+      INNGEST_POSTGRES_URI: ${INNGEST_POSTGRES_URI:-postgresql://postgres:postgres@inngest-postgres:5432/inngest}
+
 
   redis:
     image: redis:latest

@@ -8,10 +8,11 @@ services:
     networks:
       - inngestnet
     volumes:
-      - ./inngest.yml:/app/config/inngest.yml
+      - ./inngest.yml:${INNGEST_CONFIG_FILE}
       - inngest_data:/app/data
     environment:
       INNGEST_DEV: 0
+      INNGEST_CONFIG_FILE: ${INNGEST_CONFIG_FILE}
       INNGEST_EVENT_KEYS: ${INNGEST_EVENT_KEYS:-local,development,production}
       INNGEST_SIGNING_KEY: ${INNGEST_SIGNING_KEY:-local-signing-key}
       INNGEST_REDIS_URI: ${INNGEST_REDIS_URI:-redis://inngest-redis:6379}

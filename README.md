@@ -6,4 +6,6 @@
 Have a look at [./ansible-vault](./ansible-vault/README.md) to get started, there you can at least encrypt vault items.
 
 
-## [Metabase w/postgres](./metabase/README.md)
+## Metabase
+
+[Metabase w/postgres](./metabase/README.md)

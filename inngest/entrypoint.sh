@@ -4,7 +4,6 @@
 EVENT_KEYS=""
 IFS=',' read -ra KEYS <<< "$INNGEST_EVENT_KEYS"
 for key in "${KEYS[@]}"; do
-  echo "GETTING KEY"
   EVENT_KEYS="$EVENT_KEYS --event-key $key"
 done
 

@@ -2,7 +2,7 @@ services:
   metabase:
     image: metabase/metabase:latest
     container_name: metabase
-    # Remove platform if not using apple silicon.
+    # Remove platform if not using Apple Silicon.
     platform: linux/amd64
     hostname: metabase
     volumes:

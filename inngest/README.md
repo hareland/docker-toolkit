@@ -6,7 +6,7 @@
 cp .env.example .env
 ```
 
-Make sure to update the `SIGNING_KEY` and `EVENT_KEYS` in the .env file
+Make sure to update the `INNGEST_SIGNING_KEY` and `INNGEST_EVENT_KEYS` in the .env file
 
 **Running**
 

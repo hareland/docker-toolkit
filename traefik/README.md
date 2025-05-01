@@ -33,4 +33,4 @@ aka your `localhost:3000`
 
 ### echo server
 
-Uncomment all the blocks with `# minimal echo example` and visit [http://echo.localhost](http://echo.localhost) and [http://echo1.localhost](http://echo1.localhost)
+Uncomment all the blocks under `# minimal echo example` located in this repo and visit [http://echo.localhost](http://echo.localhost) and [http://echo1.localhost](http://echo1.localhost)

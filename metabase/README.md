@@ -2,7 +2,7 @@
 
 **Getting ready**
 
-You need to prepare environment variables, customize if you feel like it.
+You need to prepare environment variables.
 
 ```bash
 cp .env.example .env

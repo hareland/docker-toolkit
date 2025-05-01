@@ -1,0 +1,21 @@
+services:
+  traefik:
+    image: traefik:latest
+    restart: unless-stopped
+    ports:
+      - '80:80'
+      - '443:443'
+      - '8080:8080'
+    volumes:
+      - "./traefik.yml:/etc/traefik/traefik.yml:ro"
+      - "./provider.yml:/etc/traefik/provider.yml:ro"
+
+      # This is for the certs config so there is no need to generate them every time it starts.
+      - "./letsencrypt:/letsencrypt"
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - traefik
+
+networks:
+  traefik:
+    driver: bridge

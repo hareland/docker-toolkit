@@ -1,0 +1,46 @@
+global:
+  sendAnonymousUsage: false
+
+entryPoints:
+  http:
+    address: ':80'
+  https:
+    address: ':443'
+
+api:
+  debug: true
+  dashboard: true
+  insecure: true
+  disableDashboardAd: true
+
+serversTransport:
+  insecureSkipVerify: true
+
+providers:
+#  http:
+#    endpoint: 'http://host.docker.internal:3002/api/internal/traefik/routes?token=local'
+#    pollInterval: '10s'
+#    headers:
+#      name: value
+  docker:
+    endpoint: "unix:///var/run/docker.sock"
+    exposedByDefault: false
+    watch: true
+  file:
+    filename: /etc/traefik/provider.yml
+    watch: true
+
+accessLog: { }
+
+log:
+  level: DEBUG
+
+certificatesResolvers:
+  default:
+    acme:
+      email: you@app.localhost
+      storage: /letsencrypt/acme.json
+      httpChallenge:
+        entryPoint: https
+
+

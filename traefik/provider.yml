@@ -1,0 +1,20 @@
+http:
+  routers:
+    # Traefik dashboard on custom domain
+    dashboard:
+      entryPoints:
+        - http
+      rule: Host(`traefik.localhost`) && PathPrefix(`/api`) || PathPrefix(`/dashboard`) || PathPrefix(`/debug`)
+      service: api@internal
+
+    app:
+      entryPoints:
+        - http
+      rule: Host(`app.localhost`)
+      service: service-app
+
+  services:
+    service-app:
+      loadBalancer:
+        servers:
+          - url: "http://host.docker.internal:3000"

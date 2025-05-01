@@ -2,6 +2,8 @@ services:
   traefik:
     image: traefik:latest
     restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
     ports:
       - '80:80'
       - '443:443'
@@ -15,6 +17,12 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
       - traefik
+
+# minimal echo example
+#  echo-server:
+#    image: mendhak/http-https-echo:36
+#    ports:
+#      - 3001:8080
 
 networks:
   traefik:

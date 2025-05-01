@@ -27,3 +27,10 @@ aka your `localhost:3000`
 | [./traefik.yml](./traefik.yml)   | Traefik config...                                          |
 | [./provider.yml](./provider.yml) | File provider, defines traefik dashboard and app.localhost |
 
+
+## Examples
+
+
+### echo server
+
+Uncomment all the blocks with `# minimal echo example` and visit [http://echo.localhost](http://echo.localhost) and [http://echo1.localhost](http://echo1.localhost)

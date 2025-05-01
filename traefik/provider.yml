@@ -12,9 +12,21 @@ http:
         - http
       rule: Host(`app.localhost`)
       service: service-app
+# minimal echo example
+#    echo:
+#      entryPoints:
+#        - http
+#      rule: Host(`echo.localhost`) || Host(`echo1.localhost`)
+#      service: service-echo
 
   services:
     service-app:
       loadBalancer:
         servers:
           - url: "http://host.docker.internal:3000"
+# minimal echo example
+#    service-echo:
+#      loadBalancer:
+#        servers:
+#          - url: "http://host.docker.internal:3001"
+#

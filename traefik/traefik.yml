@@ -17,11 +17,6 @@ serversTransport:
   insecureSkipVerify: true
 
 providers:
-#  http:
-#    endpoint: 'http://host.docker.internal:3002/api/internal/traefik/routes?token=local'
-#    pollInterval: '10s'
-#    headers:
-#      name: value
   docker:
     endpoint: "unix:///var/run/docker.sock"
     exposedByDefault: false
@@ -29,6 +24,11 @@ providers:
   file:
     filename: /etc/traefik/provider.yml
     watch: true
+#  http:
+#    endpoint: 'http://host.docker.internal:3002/api/internal/traefik/routes?token=local'
+#    pollInterval: '10s'
+#    headers:
+#      name: value
 
 accessLog: { }
 

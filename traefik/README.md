@@ -8,12 +8,22 @@ git clone git@github.com:hareland/docker-toolkit.git
 cd docker-toolkit/traefik
 ```
 
-**Getting up and running**
+**Usage**
 
 ```bash
 docker compose up
 ```
 
-You can now visit [http://traefik.localhost/dashboard/](http://traefik.localhost/dashboard/) to see the Traefik dashboard. ([yes it requires a /dashboard/ prefix](https://doc.traefik.io/traefik/operations/dashboard/))
+**Routers in use**
 
-Configure any routers/services in [./provider.yml](./provider.yml)
+Visit [http://traefik.localhost/dashboard/](http://traefik.localhost/dashboard/) to see the Traefik
+dashboard. ([yes it requires a /dashboard/ prefix](https://doc.traefik.io/traefik/operations/dashboard/))
+
+You can also visit [http://app.localhost](http://app.localhost), which forwards to `http://host.docker.internal:3000`
+aka your `localhost:3000`
+
+| File                             | Desc                                                       |
+|----------------------------------|------------------------------------------------------------|
+| [./traefik.yml](./traefik.yml)   | Traefik config...                                          |
+| [./provider.yml](./provider.yml) | File provider, defines traefik dashboard and app.localhost |
+
